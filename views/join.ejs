@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👊📄✂︎ Yoyaku Janken</title>
+</head>
+<body>
+    <h1>👊📄✂︎ Yoyaku Janken - ルーム： <%= roomData.roomId %> </h1>
+    <ul>
+        <% roomData.members.forEach((member) => { %>
+            <li>
+                <%= member.name %>
+                <% if (member.rpsChoices.length === 0) { %>
+                    <% for (let i = 0; i < roomData.numRounds; i++) { %>
+                        <span>∅</span>
+                    <% } %>
+                <% } else { %>
+                    <% member.rpsChoices.forEach((choice) => { %>
+                        <span>
+                            <%= choice === 'rock' ? '👊' : choice === 'paper' ? '📄' : '✂︎' %>
+                        </span>
+                    <% }); %>
+                <% } %>
+                <a href="/edit/<%= roomData.roomId %>/<%= member.name %>">編集</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👊📄✂︎ Yoyaku Janken</title>
+</head>
+<body>
+    <h1>👊📄✂︎ Yoyaku Janken - 部屋作成</h1>
+
+    <form action="/create" method="post">
+        <label for="numPeople">参加人数:</label>
+        <input type="number" name="numPeople" id="numPeople" required>
+        <button id="numPeopleBtn" type="button">セット</button>
+        <div id="memberInputContainer"></div>
+
+        <label for="numRounds">ラウンド数</label>
+        <input type="number" name="numRounds" id="numRounds" required>
+        <br>
+
+        <button type="submit">登録</button>
+    </form>
+
+    <script>
+        const memberInput = document.querySelector("#memberInputContainer");
+
+        document.querySelector('#numPeopleBtn').addEventListener('click', function(event) {
+            event.preventDefault();
+            const numPeople = Number(document.querySelector("#numPeople").value);
+
+            memberInput.innerHTML = '';
+
+            for (let i = 0; i < numPeople; i++) {
+                const unList = document.createElement('ul');
+
+                const label = document.createElement('label');
+                label.htmlFor = `member_${i}`;
+                label.textContent = `member ${i}: `;
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `member_${i}`;
+                input.id = `member_${i}`;
+                input.required = true;
+
+                unList.appendChild(label);
+                unList.appendChild(input);
+
+                memberInput.appendChild(unList);
+            }
+        });
+
+        document.querySelector("#numRoundsBtn").addEventListener('click', function(event) {
+            event.preventDefault();
+            const numRounds = Number(document.querySelector("#numRounds").value);
+            const rpsChoicesContainer = document.querySelector("#rpsChoicesContainer");
+
+            rpsChoicesContainer.innerHTML = '';
+
+            for (let i = 0; i < numRounds; i++) {
+                const unList = document.createElement('ul');
+
+                const label = document.createElement('label');
+                label.htmlFor = `rps_${i}`;
+                label.textContent = `ラウンド ${i + 1}: `;
+
+                const input = document.createElement('select');
+                input.name = `rps_${i}`;
+                input.id = `rps_${i}`;
+                input.required = true;
+
+                const choices = [{name: "rock", emoji: "👊"}, {name: "paper", emoji: "📄"}, {name: "scissors", emoji: "✂︎"}];
+
+                for (let choice of choices) {
+                    const option = document.createElement('option');
+                    option.value = choice.name;
+                    option.textContent = choice.emoji;
+
+                    input.appendChild(option);
+                }
+
+                unList.appendChild(label);
+                unList.appendChild(input);
+
+                rpsChoicesContainer.appendChild(unList);
+            }
+        })
+    
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
