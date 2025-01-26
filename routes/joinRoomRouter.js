@@ -1,18 +1,17 @@
 import { Router } from "express";
-import { getRoomById } from "../models/room.model.js";
+import { getRoomById } from "../services/roomService.js";
 
 const joinRoomRouter = Router();
 
-joinRoomRouter.get("/:roomId", (req, res) => {
+joinRoomRouter.get("/:roomId", async (req, res) => {
     const roomId = req.params.roomId;
-    const roomData = getRoomById(roomId);
+    const roomData = await getRoomById(roomId);
 
     if(!roomData){
         res.status(404).send("Room not found");
     }
 
     res.render("join", {roomData: roomData});
-
 });
 
 

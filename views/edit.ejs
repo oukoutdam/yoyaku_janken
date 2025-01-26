@@ -10,5 +10,19 @@
     <p><%= editName %> さんの編集</p>
     <ul>
     </ul>
+    <form action="/edit" method="POST">
+        <% for (let i = 0; i < roomData.numRounds; i++) { %>
+            <label for="choice<%= i %>">Round <%= i + 1 %>:</label>
+            <select name="choices[]" id="choice<%= i %>">
+                <option value="rock">👊</option>
+                <option value="paper">📄</option>
+                <option value="scissors">✂︎</option>
+            </select>
+            <br>
+        <% } %>
+        <input type="hidden" name="roomId" value="<%= roomData.roomId %>">
+        <input type="hidden" name="name" value="<%= editName %>">
+        <button type="submit">Submit Choices</button>
+    </form>
 </body>
 </html>

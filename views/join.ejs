@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>👊📄✂︎ Yoyaku Janken - ルーム： <%= roomData.roomId %> </h1>
+    <button type="button" id="showResultsBtn">結果を表示 🔒</button>
     <ul>
         <% roomData.members.forEach((member) => { %>
             <li>
@@ -17,7 +18,7 @@
                     <% } %>
                 <% } else { %>
                     <% member.rpsChoices.forEach((choice) => { %>
-                        <span>
+                        <span class="hidable" style="display: none;">
                             <%= choice === 'rock' ? '👊' : choice === 'paper' ? '📄' : '✂︎' %>
                         </span>
                     <% }); %>
@@ -26,5 +27,12 @@
             </li>
         <% }); %>
     </ul>
+    <script>
+        document.querySelector("#showResultsBtn").addEventListener("click", () => {
+            document.querySelectorAll(".hidable").forEach((element) => {
+                element.style.display = element.style.display === "none" ? "inline" : "none";
+            });
+        })
+    </script>
 </body>
 </html>

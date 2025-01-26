@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createRoom } from "../models/room.model.js";
+import { createRoom } from "../services/roomService.js";
 
 function transformData(obj) {
     const numPeople = parseInt(obj.numPeople);
@@ -24,7 +24,7 @@ createRoomRouter.get('/', (req, res) => {
     res.render('create');
 });
 
-createRoomRouter.post('/', (req, res) => {
+createRoomRouter.post('/', async (req, res) => {
     console.log(req.body);
     const members = transformData(req.body);
     let data = {};
@@ -33,7 +33,7 @@ createRoomRouter.post('/', (req, res) => {
     data.roomId = generateRandomString();
 
     console.log(data);
-    createRoom(data);
+    await createRoom(data);
 
     res.redirect(`/join/${data.roomId}`);
 })
