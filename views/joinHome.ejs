@@ -3,15 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👊📄✂︎ Yoyaku Janken</title>
+    <title>YOYAKU JANKEN</title>
+    <link rel="stylesheet" href="output.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+    <!-- Basic favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+
+    <!-- PNG favicons for different sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+
+    <!-- Apple Touch Icon (for iOS devices) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
-    <a href="/"><h1>👊📄✂︎ Yoyaku Janken - ルームID入力 </h1></a>
-    <form action="/join" method="post">
-        <label for="roomId">ルームID:</label>
-        <input type="text" id="roomId" name="roomId" required>
-        <button type="submit">参加</button>
-    </form>
-    
+    <div class="mx-auto w-full md:w-4/5 h-screen flex flex-col items-center justify-center yusei-magic-regular">
+        <div class="mb-12 flex flex-col items-center">
+            <a href="/" class="text-3xl rammetto-one-regular hover:text-yellow-400 text-drop-shadow transition-colors ease-in-out duration-200 text-center">
+                <h1>YOYAKU JANKEN</h1>
+            </a>
+            <p class="hover:text-yellow-400 text-xl yusei-magic-regular mt-2 underline underline-offset-2 text-center">ルームID入力</p>
+        </div>
+
+        <form action="/join" method="post" class="w-full md:w-3/5 mx-auto">
+            <fieldset class="border border-gray-300 p-6 rounded-lg">
+                <legend class="px-2 text-lg font-medium">ルーム参加</legend>
+                
+                <div class="space-y-4">
+                    <div class="flex flex-col gap-2">
+                        <label for="roomId" class="text-md font-medium">ルームID:</label>
+                        <input 
+                            type="text" 
+                            id="roomId" 
+                            name="roomId" 
+                            class="w-full h-8 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-100 focus:border-yellow-100" 
+                            required
+                        >
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="w-full btn btn-soft hover:btn-warning mt-4 px-4 py-2 text-lg"
+                    >
+                        参加
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </body>
 </html>
