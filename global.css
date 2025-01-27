@@ -1,1 +1,31 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+/* *
+{
+    border: 1px solid red;
+} */
+
+.rammetto-one-regular {
+    font-family: "Rammetto One", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.yusei-magic-regular {
+    font-family: "Yusei Magic", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-drop-shadow {
+    text-shadow: 2px 2px #000000;
+}
+
+
+body {
+    background-color: #1a1919; 
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(0,0,0,0.1) 25%, transparent 25%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+} 
