@@ -10,22 +10,92 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+    <!-- Basic favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+
+    <!-- PNG favicons for different sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+
+    <!-- Apple Touch Icon (for iOS devices) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
-    <a href="/"><h1>👊📄✂︎ Yoyaku Janken - 部屋作成</h1></a>
 
-    <form action="/create" method="post">
-        <label for="numPeople">参加人数:</label>
-        <input type="number" name="numPeople" id="numPeople" required>
-        <button id="numPeopleBtn" type="button">セット</button>
-        <div id="memberInputContainer"></div>
+    <div class="mx-auto w-full md:w-4/5 h-screen flex flex-col items-center justify-center">
+        <div class="mb-12 flex flex-col items-center">
+            <a href="/" class="text-3xl rammetto-one-regular hover:text-yellow-400 text-drop-shadow transition-colors ease-in-out duration-200 text-center"><h1>YOYAKU JANKEN</h1></a>
+            <p class="hover:text-yellow-400 text-xl yusei-magic-regular mt-2 underline underline-offset-2 text-center">新規作成</p>
+        </div>
 
-        <label for="numRounds">ラウンド数</label>
-        <input type="number" name="numRounds" id="numRounds" required>
-        <br>
+        <!-- <form action="/create" method="post" class="w-full md:w-3/5">
+            <fieldset class="fieldset border border-base-300 p-4 rounded-box">
+                <legend class="fieldset-legend text-l">部屋設定</legend>
 
-        <button type="submit">登録</button>
-    </form>
+                <label for="numPeople" class="fieldset-label text-l">参加人数:</label>
+                <div>
+                    <input type="number" class="input validator w-24" name="numPeople" id="numPeople" required>
+                    <button id="numPeopleBtn" type="button" class="btn btn-primary">セット</button>
+                </div>
+                <div id="memberInputContainer"></div>
+
+                <label for="numRounds" class="fieldset-label">ラウンド数</label>
+                <input type="number" name="numRounds" class="input" id="numRounds" required>
+                <br>
+
+                <button type="submit" class="btn btn-primary">登録</button>
+            </fieldset>
+        </form> -->
+
+        <form action="/create" method="post" class="w-full md:w-3/5 mx-auto">
+            <fieldset class="border border-gray-300 p-6 rounded-lg">
+                <legend class="px-2 text-lg font-medium">部屋設定</legend>
+                
+                <div class="space-y-4">
+                    <div class="flex flex-col gap-2">
+                        <label for="numPeople" class="text-md font-medium">参加人数:</label>
+                        <div class="flex gap-2">
+                            <input 
+                                type="number" 
+                                class="w-24 h-8 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-100 focus:border-yellow-100" 
+                                name="numPeople" 
+                                id="numPeople" 
+                                required
+                            >
+                            <button 
+                                id="numPeopleBtn" 
+                                type="button" 
+                                class="btn px-4 h-8 py-2 btn-soft hover:btn-warning"
+                            >
+                                セット
+                            </button>
+                        </div>
+                    </div>
+        
+                    <div id="memberInputContainer" class="overflow-auto max-h-44 p-4 flex-col space-y-2 border border-gray-600 hidden"></div>
+        
+                    <div class="flex flex-col gap-2">
+                        <label for="numRounds" class="text-md font-medium">ラウンド数</label>
+                        <input 
+                            type="number" 
+                            name="numRounds" 
+                            class="w-full h-8 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-100 focus:border-yellow-100" 
+                            id="numRounds" 
+                            required
+                        >
+                    </div>
+        
+                    <button 
+                        type="submit" 
+                        class="w-full btn btn-soft hover:btn-warning mt-4 px-4 py-2 "
+                    >
+                        登録
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
     <script>
         const memberInput = document.querySelector("#memberInputContainer");
@@ -35,6 +105,8 @@
             const numPeople = Number(document.querySelector("#numPeople").value);
 
             memberInput.innerHTML = '';
+            memberInput.classList.remove('hidden');
+            memberInput.classList.add('flex');
 
             for (let i = 0; i < numPeople; i++) {
                 const unList = document.createElement('ul');
@@ -42,12 +114,14 @@
                 const label = document.createElement('label');
                 label.htmlFor = `member_${i}`;
                 label.textContent = `member ${i}: `;
+                label.classList.add('fieldset-label', 'inline-block', 'w-28');
 
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.name = `member_${i}`;
                 input.id = `member_${i}`;
                 input.required = true;
+                input.classList.add('input', 'w-32', 'h-6');
 
                 unList.appendChild(label);
                 unList.appendChild(input);
@@ -55,45 +129,6 @@
                 memberInput.appendChild(unList);
             }
         });
-
-        document.querySelector("#numRoundsBtn").addEventListener('click', function(event) {
-            event.preventDefault();
-            const numRounds = Number(document.querySelector("#numRounds").value);
-            const rpsChoicesContainer = document.querySelector("#rpsChoicesContainer");
-
-            rpsChoicesContainer.innerHTML = '';
-
-            for (let i = 0; i < numRounds; i++) {
-                const unList = document.createElement('ul');
-
-                const label = document.createElement('label');
-                label.htmlFor = `rps_${i}`;
-                label.textContent = `ラウンド ${i + 1}: `;
-
-                const input = document.createElement('select');
-                input.name = `rps_${i}`;
-                input.id = `rps_${i}`;
-                input.required = true;
-
-                const choices = [{name: "rock", emoji: "👊"}, {name: "paper", emoji: "📄"}, {name: "scissors", emoji: "✂︎"}];
-
-                for (let choice of choices) {
-                    const option = document.createElement('option');
-                    option.value = choice.name;
-                    option.textContent = choice.emoji;
-
-                    input.appendChild(option);
-                }
-
-                unList.appendChild(label);
-                unList.appendChild(input);
-
-                rpsChoicesContainer.appendChild(unList);
-            }
-        })
-    
     </script>
-
-    <script src="script.js"></script>
 </body>
 </html>
