@@ -29,3 +29,12 @@ body {
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
 } 
+
+.icon-container i {
+transition: transform 0.2s ease-in-out, font-size 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.icon-container i.hovered {
+transform: scale(1.25);
+font-size: 2.5rem;
+color: #facc15; /* yellow-400 */
+}
