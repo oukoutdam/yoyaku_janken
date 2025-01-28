@@ -3,12 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👊📄✂︎ Yoyaku Janken</title>
-    <link rel="stylesheet" href="output.css">
+    <title>YOYAKU JANKEN</title>
+    <link rel="stylesheet" href="/output.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+    <!-- Basic favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+
+    <!-- PNG favicons for different sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+    <!-- Apple Touch Icon (for iOS devices) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body>
-    <a href="/"><h1>👊📄✂︎ Yoyaku Janken </h1></a>
-    <a href="/create">部屋作成</a>
-    <a href="/join">部屋ジョイン</a>
+    <div class="mx-auto w-full md:w-4/5 h-screen flex flex-col items-center justify-center">
+        <div class="mb-12 flex flex-col items-center">
+            <a href="/" class="text-5xl rammetto-one-regular hover:text-yellow-400 text-drop-shadow transition-colors ease-in-out duration-200 text-center"><h1>YOYAKU JANKEN</h1></a>
+            <div class="text-4xl w-32 h-20 flex flex-row justify-center items-center space-x-5">
+                <span><i class="ph ph-hand-fist hover:scale-125 hover:text-5xl hover:text-yellow-400 transition-all transform ease-in-out"></i></span>
+                <span><i class="ph ph-hand hover:scale-125 hover:text-5xl hover:text-yellow-400 transition-all transform ease-in-out"></i></span>
+                <span><i class="ph ph-scissors hover:scale-125 hover:text-5xl hover:text-yellow-400 transition-all transform ease-in-out"></i></span>
+            </div>
+        </div>
+        <a href="/create" class="text-3xl btn btn-soft w-52 h-16 mb-8 hover:btn-warning yusei-magic-regular">部屋作成</a>
+        <a href="/join" class="text-3xl btn btn-soft w-52 h-16 hover:btn-warning yusei-magic-regular">部屋ジョイン</a>
+    </div>
 </body>
 </html>

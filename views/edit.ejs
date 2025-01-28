@@ -3,26 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👊📄✂︎ Yoyaku Janken</title>
+    <title>YOYAKU JANKEN</title>
+    <link rel="stylesheet" href="/output.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+    <!-- Basic favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 <body>
-    <a href="/"><h1>👊📄✂︎ Yoyaku Janken - ルーム：</a> <%= roomData.roomId %> </h1>
-    <p><%= editName %> さんの編集</p>
-    <ul>
-    </ul>
-    <form action="/edit" method="POST">
-        <% for (let i = 0; i < roomData.numRounds; i++) { %>
-            <label for="choice<%= i %>">Round <%= i + 1 %>:</label>
-            <select name="choices[]" id="choice<%= i %>">
-                <option value="rock">👊</option>
-                <option value="paper">📄</option>
-                <option value="scissors">✂︎</option>
-            </select>
-            <br>
-        <% } %>
-        <input type="hidden" name="roomId" value="<%= roomData.roomId %>">
-        <input type="hidden" name="name" value="<%= editName %>">
-        <button type="submit">Submit Choices</button>
-    </form>
+    <div class="mx-auto w-full md:w-4/5 h-screen flex flex-col items-center justify-center yusei-magic-regular">
+        <div class="mb-4 flex flex-col items-center">
+            <a href="/" class="text-3xl rammetto-one-regular hover:text-yellow-400 text-drop-shadow transition-colors ease-in-out duration-200 text-center">
+                <h1>YOYAKU JANKEN</h1>
+            </a>
+            <p class="text-xl yusei-magic-regular mt-2 text-center underline underline-offset-2 hover:text-yellow-400">
+                ルーム：<%= roomData.roomId %>
+            </p>
+        </div>
+
+        <p class="text-2xl mb-4 yusei-magic-regular mt-2 text-center">
+            <%= editName %> さんの編集
+        </p>
+
+        <form action="/edit" method="post" class="w-full md:w-3/5 mx-auto">
+            <fieldset class="border border-gray-300 p-3 rounded-lg">
+                <legend class="px-2 text-lg font-medium">選択</legend>
+                
+                <div class="space-y-4 max-h-80 overflow-y-auto p-3 pl-8">
+                    <% for (let i = 0; i < roomData.numRounds; i++) { %>
+                        <div class="flex items-center gap-4 ">
+                            <label for="choice<%= i %>" class="text-md font-medium w-24">ラウンド<%= i + 1 %>:</label>
+                            <select 
+                                name="choices[]" 
+                                id="choice<%= i %>"
+                                class="w-32 h-8 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-100 focus:border-yellow-100"
+                            >
+                                <option value="rock">グー</option>
+                                <option value="paper">チョキ</option>
+                                <option value="scissors">パー</option>
+                            </select>
+                        </div>
+                    <% } %>
+
+                    <input type="hidden" name="roomId" value="<%= roomData.roomId %>">
+                    <input type="hidden" name="name" value="<%= editName %>">
+                    
+                    <button 
+                        type="submit" 
+                        class="w-full btn btn-soft hover:btn-warning mt-4 px-4 py-2 text-lg"
+                    >
+                        送信
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </body>
 </html>
