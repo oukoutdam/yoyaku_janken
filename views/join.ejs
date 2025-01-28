@@ -3,36 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👊📄✂︎ Yoyaku Janken</title>
+    <title>YOYAKU JANKEN</title>
+    <link rel="stylesheet" href="/output.css">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rammetto+One&family=Yusei+Magic&display=swap" rel="stylesheet">
+
+    <!-- Basic favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+
+    <!-- PNG favicons for different sizes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+
+    <!-- Apple Touch Icon (for iOS devices) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
 </head>
 <body>
-    <a href="/"><h1>👊📄✂︎ Yoyaku Janken - ルーム：</a> <%= roomData.roomId %> </h1>
-    <button type="button" id="showResultsBtn">結果を表示 🔒</button>
-    <ul>
-        <% roomData.members.forEach((member) => { %>
-            <li>
-                <%= member.name %>
-                <% if (member.rpsChoices.length === 0) { %>
-                    <% for (let i = 0; i < roomData.numRounds; i++) { %>
-                        <span>∅</span>
-                    <% } %>
-                <% } else { %>
-                    <% member.rpsChoices.forEach((choice) => { %>
-                        <span class="hidable" style="display: none;">
-                            <%= choice === 'rock' ? '👊' : choice === 'paper' ? '📄' : '✂︎' %>
-                        </span>
+    <div class="mx-auto w-full md:w-4/5 h-screen flex flex-col items-center yusei-magic-regular">
+        <div class="mb-8 flex flex-col items-center">
+            <a href="/" class="mt-12 md:mt-48 text-3xl rametto-one-regular hover:text-yellow-400 text-drop-shadow transition-colors ease-in-out duration-200 text-center">
+                <h1>YOYAKU JANKEN</h1>
+            </a>
+            <p class="hover:text-yellow-400 text-xl yusei-magic-regular mt-2 underline underline-offset-2 text-center">部屋：<%= roomData.roomId %></p>
+        </div>
+
+        <% let notVoted = roomData.members.filter((member) => member.rpsChoices.length === 0).length %>
+        <p class="hidden"  id="numNotVoted"><%= notVoted %></p>
+        <% if (notVoted > 0) { %>
+            <p>まだ入れていないひとは <span class="text-xl font-bold text-yellow-400"><%= notVoted %></span> います！</p>
+        <% } else { %>
+            <p>みんなはもう入れました！</p>
+        <% } %>
+
+        <button type="button" id="showResultsBtn" class="w-32 h-8 mt-4 mb-4 btn btn-soft hover:btn-warning">結果を表示 🔒</button>
+
+        <div class="overflow-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>名前</th>
+                        <% for (let i = 1 ; i <= roomData.numRounds ; i++) { %>
+                        <th><%= i%></th>
+                        <% } %>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let count = 0; %>
+                    <% roomData.members.forEach((member) => { %>
+                    <tr>
+                        <td><%= ++count %></td>
+                        <td><%= member.name %></td>
+                        <% if (member.rpsChoices.length === 0) { %>
+                            <% for (let i = 0 ; i < roomData.numRounds ; i++) { %>
+                                <td>∅</td>
+                            <% } %>
+                        <% } else { %>
+                            <% member.rpsChoices.forEach((choice) => { %>
+                                <td class="text-center text-xl">
+                                    <% if (choice === 'rock') { %>
+                                        <i class="ph ph-hand-fist hidable text-yellow-400" style="display: none;"></i><i class="hidable ph ph-lock"></i>
+                                    <% } else if (choice === 'paper') { %>
+                                        <i class="ph ph-hand hidable text-pink-400" style="display: none;"></i><i class="hidable ph ph-lock"></i>
+                                    <% } else { %>
+                                        <i class="ph ph-scissors hidable text-violet-400" style="display: none;"></i><i class="hidable ph ph-lock"></i>
+                                    <% } %>
+                                </td>
+                            <% }); %>
+                        <% } %>
+                        <td>
+                            <a href="/edit/<%= roomData.roomId %>/<%= member.name %>"
+                                class="btn btn-soft hover:btn-warning h-6 w-16"
+                            >編集</a>
+                        </td>
+                    </tr>
                     <% }); %>
-                <% } %>
-                <a href="/edit/<%= roomData.roomId %>/<%= member.name %>">編集</a>
-            </li>
-        <% }); %>
-    </ul>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
     <script>
         document.querySelector("#showResultsBtn").addEventListener("click", () => {
+            const numVotes = Number(document.querySelector("#numNotVoted").textContent);
+            if (numVotes > 0) {
+                alert("まだ入れていないひとがいます！");
+                return;
+            }
+
             document.querySelectorAll(".hidable").forEach((element) => {
                 element.style.display = element.style.display === "none" ? "inline" : "none";
             });
         })
+
     </script>
 </body>
 </html>
