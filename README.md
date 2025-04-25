@@ -19,3 +19,4 @@ npm run dev
 - [ ] add dialog box to show how to share
 - [ ] add cacheing to make it easier to go to previous rooms
 - [ ] add winner counter on results page for better readability
+- [ ] add a how-to modal to show how to use the app
