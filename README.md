@@ -20,3 +20,4 @@ npm run dev
 - [ ] add cacheing to make it easier to go to previous rooms
 - [ ] add winner counter on results page for better readability
 - [ ] add a how-to modal to show how to use the app
+- [ ] Fix light-mode colors
