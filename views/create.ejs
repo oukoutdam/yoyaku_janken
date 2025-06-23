@@ -83,8 +83,7 @@
     <script>
         const memberInput = document.querySelector("#memberInputContainer");
 
-        document.querySelector('#numPeopleBtn').addEventListener('click', function(event) {
-            event.preventDefault();
+        function setNumberPeople(){
             const numPeople = Number(document.querySelector("#numPeople").value);
 
             memberInput.innerHTML = '';
@@ -111,6 +110,15 @@
 
                 memberInput.appendChild(unList);
             }
+        }
+
+        document.querySelector('#numPeopleBtn').addEventListener('click', function(event) {
+            event.preventDefault();
+            setNumberPeople();
+        });
+
+        document.querySelector('#numPeople').addEventListener('focusout', function(event) {
+            setNumberPeople();
         });
     </script>
 </body>
